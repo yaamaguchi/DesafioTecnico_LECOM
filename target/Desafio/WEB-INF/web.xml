@@ -27,7 +27,7 @@
 
 	<servlet-mapping>
 		<servlet-name>DesafioTecnico_LECOM</servlet-name>
-		<url-pattern>/app/*</url-pattern>
+		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 
 </web-app>

@@ -1,17 +1,29 @@
 package com.teste.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Classificacao {
+public class Classificacao implements Serializable{
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	@Column
 	private String descricao;
-	private float valor;
+	@Column
+	private double valor;
+	
+	public Classificacao(String descricao, double valor){
+		this.descricao = descricao;
+		this.valor = valor;
+	}
 	
 	
 	public Long getId() {
@@ -26,10 +38,10 @@ public class Classificacao {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public float getValor() {
+	public double getValor() {
 		return valor;
 	}
-	public void setValor(float valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 }

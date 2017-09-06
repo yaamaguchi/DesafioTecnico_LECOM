@@ -1,18 +1,29 @@
 package com.teste.app;
 
-import org.hibernate.Session;
+import javax.persistence.EntityManager;
+
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+
+import com.teste.DAO.ClassificacaoDAO;
+import com.teste.DAO.ClienteDAO;
+import com.teste.DAO.Init;
+import com.teste.model.Cliente;
 
 public class HibernateTeste {
 	private static SessionFactory factory; 
 	public static void main(String args[]){
-		factory = new Configuration().configure().buildSessionFactory();
 		
-		Session session = factory.openSession();
-		Transaction tx = null;
-		System.out.println(session.isConnected());
-	
+		EntityManager em = Init.getInstancia().getManager();
+		ClassificacaoDAO.iniciarClassificacao();
+		
+		Cliente cliente1 = new Cliente("Matheus");
+		Cliente cliente2 = new Cliente("MatheusTeste");
+		ClienteDAO c = new ClienteDAO();
+		c.registerCliente(cliente1, "Prata");
+		
+		c.updateCliente(cliente2, "Ouro",cliente1);
+		
+		c.deleteCliente(cliente1);
+		
 	}
 }
