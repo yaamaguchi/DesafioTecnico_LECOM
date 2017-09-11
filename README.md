@@ -30,3 +30,18 @@ Requisitos técnicos:
 - Deverá utilizar uma framework ORM para persistência dos dados
 - Banco pode ser o MySQL
 - Front-end deve ser feito React ou Vue.js
+
+OBS:
+Para o funcionamento do mesmo, altere as informações referentes à conexão com o banco de dados.
+O arquivo responsável pelas configurações "persistence.xml" é encontra no seguinte local:
+	- "SRC/JAVA/META-INFO"
+
+	<properties>
+		<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+		<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/DATABASE" /> 
+		<property name="javax.persistence.jdbc.user" value="USER" />
+		<property name="javax.persistence.jdbc.password" value="PASSWORD" />
+		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+		<property name="hibernate.hbm2ddl.auto" value="CREATE" />
+		<property name="hibernate.show_sql" value="true" />
+	</properties>
