@@ -29,6 +29,9 @@ public class Servicos implements Serializable{
 	private double valor;
 	@Column
 	private double valorFinal;
+	@Column
+	private boolean pago;
+	
 	
 	public Servicos(){}
 	
@@ -88,6 +91,14 @@ public class Servicos implements Serializable{
 	@XmlElement
 	public void setValorFinal(double valorFinal) {
 		this.valorFinal = valorFinal;
+	}
+
+	public boolean isPago() {
+		return pago;
+	}
+	@XmlElement
+	public void setPago(boolean pago) {
+		this.pago = pago;
 	}
 	
 }

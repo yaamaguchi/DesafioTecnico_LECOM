@@ -22,9 +22,8 @@ public class ClienteDAO {
 	}
 	
 	public List<Cliente> getAllClientes(){
-		
 		TypedQuery<Cliente> query =
-			      em.createQuery("SELECT c FROM Cliente c", Cliente.class);
+			      em.createQuery("SELECT c FROM Cliente c", com.teste.model.Cliente.class);
 		List<Cliente> results=new ArrayList<Cliente>();
 		try{
 			results = query.getResultList();
@@ -35,33 +34,40 @@ public class ClienteDAO {
 	}
 	
 	public Cliente getClienteByID(Long id){
-		Cliente c = null;
+		TypedQuery<Cliente> query =
+			      em.createQuery("SELECT c FROM Cliente c where c.id ="+id, com.teste.model.Cliente.class);
+		List<Cliente> results=new ArrayList<Cliente>();
 		try{
-			c = em.find(Cliente.class, id);
+			results = query.getResultList();
+			if(results.size()==1){
+				return results.get(0);
+			}
 		}catch(Exception ex){
-			System.out.print(ex.getMessage());
+			System.out.println(ex.getMessage());
 		}
-		return c;
+		return null;
 	}
 	
-	public Cliente registerCliente(Cliente c, String tipo){
+	public Cliente registerCliente(Cliente c){
 		this.trns = em.getTransaction();
 		this.trns.begin();
+
 		try{
-			c.setClassificacao(ClassificacaoDAO.iniciarClassificacao().getClassificacao(tipo));
+			c.setClassificacao(ClassificacaoDAO.iniciarClassificacao().getClassificacao(c.getClassificacao().getDescricao()));
 			this.em.persist(c);
-			this.trns.commit();
+			this.em.getTransaction().commit();
 		}catch(Exception ex){
 			System.out.println(ex);
 		}
+
 		return c;
 	}
 	
-	public Cliente updateCliente(Cliente cAtualizar, String tipo, Cliente cAntigo){
+	public Cliente updateCliente(Cliente cAtualizar, Cliente cAntigo){
 		Cliente cAux = em.find(Cliente.class, cAntigo.getId());
 		this.trns = em.getTransaction();
 		this.trns.begin();
-		cAux.setClassificacao(ClassificacaoDAO.iniciarClassificacao().getClassificacao(tipo));
+		cAux.setClassificacao(ClassificacaoDAO.iniciarClassificacao().getClassificacao(cAtualizar.getNome()));
 		cAux.setNome(cAtualizar.getNome());
 		try{
 			this.trns.commit();

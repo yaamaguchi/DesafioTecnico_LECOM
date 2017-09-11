@@ -25,10 +25,10 @@ public class Cliente implements Serializable{
 	private Long id;
 	@Column
 	private String nome;
-	@OneToOne (cascade=CascadeType.ALL)
+	@OneToOne 
 	private Classificacao classificacao;
 	
-	@ManyToMany (fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+	@ManyToMany (fetch = FetchType.EAGER)
 	private List<Servicos>listaServicos;
 
 	public Cliente(){}

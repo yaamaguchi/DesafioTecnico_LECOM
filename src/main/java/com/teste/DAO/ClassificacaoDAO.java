@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import com.teste.model.Classificacao;
@@ -20,16 +21,35 @@ public class ClassificacaoDAO {
 			init = new ClassificacaoDAO();
 			em = Init.getInstancia().getManager();
 			em.getTransaction().begin();
-			Classificacao cOuro = new Classificacao("Ouro", 0.1);
-			Classificacao cPrata = new Classificacao("Prata", 0.05);
-			
-			em.persist(cOuro);
-			em.persist(cPrata);
-			em.getTransaction().commit();
+			Query query = em.createQuery("SELECT c FROM Classificacao c");
+			List<Classificacao> lista = query.getResultList();
+			if(lista.size() == 2){
+				for(Classificacao c : lista){
+					if(c.getDescricao().equalsIgnoreCase("ouro") ||
+						c.getDescricao().equalsIgnoreCase("prata")){
+							return init;
+					}
+				}
+			}
+			else if(lista.isEmpty()){
+				Classificacao Ouro = new Classificacao("Ouro", 0.1);
+				Classificacao Prata = new Classificacao("Prata", 0.05);
+				em.persist(Ouro);
+				em.persist(Prata);
+				em.getTransaction().commit();
+			}
 		}
 		return init;
 	}
 	
+	public boolean verificarDados(){
+		Classificacao cOuro = getClassificacao("ouro");
+		Classificacao cPrata = getClassificacao("prata");
+		if(cOuro == null && cPrata == null)
+			return true;
+		
+		return false;
+	}
 	
 	public Classificacao getClassificacao (String tipo){
 		TypedQuery<Classificacao> query =
@@ -40,11 +60,10 @@ public class ClassificacaoDAO {
 		List<Classificacao> results = new ArrayList<Classificacao>();
 		try{
 			results = query.getResultList();
-		}catch(Exception ex){
-			System.out.println(ex.getMessage());
-		}finally{
 			if(results.size() == 1)
 				return results.get(0);
+		}catch(Exception ex){
+			System.out.println(ex.getMessage());
 		}
 		return null;
 	}

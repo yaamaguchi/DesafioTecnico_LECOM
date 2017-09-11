@@ -1,7 +1,11 @@
 package com.teste.DAO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 
 import com.teste.model.Cliente;
 import com.teste.model.Servicos;
@@ -13,6 +17,52 @@ public class ServicosDAO {
 	
 	public ServicosDAO(){
 		this.em = Init.getInstancia().getManager();
+	}
+	
+	public List<Servicos> getAllServicos(){
+		TypedQuery<Servicos> query =
+			      em.createQuery("SELECT s FROM Servicos s", com.teste.model.Servicos.class);
+		List<Servicos> results=new ArrayList<Servicos>();
+		try{
+			results = query.getResultList();
+		}catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+		return results;
+	}
+	
+	public Servicos getServicosByClienteID(Long id){
+		TypedQuery<Servicos> query =
+			      em.createQuery("SELECT s,c FROM Servicos s"
+			      		+ "		  INNER JOIN Cliente c "
+			      		+ "		  WHERE c.id ="+id, com.teste.model.Servicos.class);
+		
+		List<Servicos> results=new ArrayList<Servicos>();
+		try{
+			results = query.getResultList();
+			if(results.size()==1){
+				return results.get(0);
+			}
+		}catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+		return null;
+	}
+	
+	
+	public Servicos getServicoById(Long id){
+		TypedQuery<Servicos> query =
+			      em.createQuery("SELECT s FROM Servicos s WHERE s.id ="+id, com.teste.model.Servicos.class);
+		List<Servicos> results=new ArrayList<Servicos>();
+		try{
+			results = query.getResultList();
+			if(results.size()==1){
+				return results.get(0);
+			}
+		}catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+		return null;
 	}
 	
 	
