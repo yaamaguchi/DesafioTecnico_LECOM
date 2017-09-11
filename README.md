@@ -38,9 +38,9 @@ O arquivo responsável pelas configurações "persistence.xml" é encontra no se
 
 	<properties>
 		<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-		<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/<b>DATABASE</b>" /> 
-		<property name="javax.persistence.jdbc.user" value="<b>USER</b>" />
-		<property name="javax.persistence.jdbc.password" value="<b>PASSWORD</b>" />
+		<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/DATABASE" /> 
+		<property name="javax.persistence.jdbc.user" value="USER"/>
+		<property name="javax.persistence.jdbc.password" value="PASSWORD" />
 		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 		<property name="hibernate.hbm2ddl.auto" value="CREATE" />
 		<property name="hibernate.show_sql" value="true" />
