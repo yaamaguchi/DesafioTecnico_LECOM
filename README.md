@@ -34,7 +34,7 @@ Requisitos técnicos:
 <b>OBS:</b>
 Para o funcionamento do mesmo, altere as informações referentes à conexão com o banco de dados.
 O arquivo responsável pelas configurações "persistence.xml" é encontra no seguinte local:
-- "SRC/JAVA/META-INFO"
+	- "SRC/JAVA/META-INFO"
 
 	<properties>
 		<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
