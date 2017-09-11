@@ -31,7 +31,7 @@ Requisitos técnicos:
 - Banco pode ser o MySQL
 - Front-end deve ser feito React ou Vue.js
 
-#OBS:
+<b>OBS:<b>
 Para o funcionamento do mesmo, altere as informações referentes à conexão com o banco de dados.
 O arquivo responsável pelas configurações "persistence.xml" é encontra no seguinte local:
 	- "SRC/JAVA/META-INFO"
