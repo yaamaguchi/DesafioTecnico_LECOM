@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement(name="classificacao")
 public class Classificacao implements Serializable{
 
 	@Id
@@ -20,6 +22,9 @@ public class Classificacao implements Serializable{
 	@Column
 	private double valor;
 	
+	
+	public Classificacao(){}
+	
 	public Classificacao(String descricao, double valor){
 		this.descricao = descricao;
 		this.valor = valor;
@@ -29,18 +34,21 @@ public class Classificacao implements Serializable{
 	public Long getId() {
 		return id;
 	}
+	@XmlElement
 	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getDescricao() {
 		return descricao;
 	}
+	@XmlElement
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 	public double getValor() {
 		return valor;
 	}
+	@XmlElement
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
